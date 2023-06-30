@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BigBang-Assessment2(Healthcare).props" />
+</Project>
