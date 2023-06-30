@@ -2,65 +2,118 @@
 using BigBang_Assessment2_Healthcare_.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BigBang_Assessment2_Healthcare_.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    
     public class UserController : ControllerBase
     {
-        private readonly IUserRepo _userRepository;
+        private readonly ApplicationDbContext _context;
 
-        public UserController(IUserRepo userRepository)
+        public UserController(ApplicationDbContext context)
         {
-            _userRepository = userRepository;
+            _context = context;
         }
 
+        // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var users = await _userRepository.GetAllUsersAsync();
-            return Ok(users);
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+            return await _context.Users.ToListAsync();
         }
 
+        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null)
+            if (_context.Users == null)
+            {
                 return NotFound();
+            }
+            var user = await _context.Users.FindAsync(id);
 
-            return Ok(user);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(User user)
-        {
-            var createdUser = await _userRepository.CreateUserAsync(user);
-            return CreatedAtAction(nameof(GetUser), new { id = createdUser.UserId }, createdUser);
-        }
-
+        // PUT: api/Users/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
+            {
                 return BadRequest();
+            }
 
-            var result = await _userRepository.UpdateUserAsync(user);
-            if (result)
-                return NoContent();
+            _context.Entry(user).State = EntityState.Modified;
 
-            return NotFound();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
+        // POST: api/Users
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<User>> PostUser(User user)
+        {
+            if (_context.Users == null)
+            {
+                return Problem("Entity set 'ProCatContext.Users'  is null.");
+            }
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+        }
+
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var result = await _userRepository.DeleteUserAsync(id);
-            if (result)
-                return NoContent();
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-            return NotFound();
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool UserExists(int id)
+        {
+            return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
     }
 }

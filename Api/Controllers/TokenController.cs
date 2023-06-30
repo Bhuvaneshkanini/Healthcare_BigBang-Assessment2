@@ -1,4 +1,5 @@
-﻿using BigBang_Assessment2_Healthcare_.Models;
+﻿using BigBang_Assessment2_Healthcare_.DTO;
+using BigBang_Assessment2_Healthcare_.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,11 +24,11 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(User _userData)
+        public async Task<IActionResult> Post(LoginModel _userData)
         {
-            if (_userData != null && _userData.UserName != null && _userData.Password != null)
+            if (_userData != null && _userData.Username != null && _userData.Password != null)
             {
-                var user = await GetUser(_userData.UserName, _userData.Password);
+                var user = await GetUser(_userData.Username, _userData.Password);
 
                 if (user != null)
                 {
