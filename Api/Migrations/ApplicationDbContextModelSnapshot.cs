@@ -50,6 +50,9 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<int>("SpecializationID")
                         .HasColumnType("int");
 
+                    b.Property<string>("status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("DoctorId");
 
                     b.HasIndex("SpecializationID");
@@ -105,6 +108,31 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.HasKey("SpecializationId");
 
                     b.ToTable("Specializations");
+                });
+
+            modelBuilder.Entity("BigBang_Assessment2_Healthcare_.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DoctorPatient", b =>

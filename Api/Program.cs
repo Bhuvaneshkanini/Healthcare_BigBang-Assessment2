@@ -23,6 +23,7 @@ namespace BigBang_Assessment2_Healthcare_
             //
             builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
             builder.Services.AddScoped<IPatientRepo, PatientRepo>();
+            builder.Services.AddScoped<IUserRepo,UserRepo>();
 
 
 
@@ -38,6 +39,7 @@ namespace BigBang_Assessment2_Healthcare_
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseHttpsRedirection();
             app.UseAuthorization();

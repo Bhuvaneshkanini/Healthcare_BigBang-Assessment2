@@ -23,6 +23,8 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public string? Address { get; set; }
 
+        public string? status { get; set; }
+
         public ICollection<Patient>? Patients { get; set; }
 
 
