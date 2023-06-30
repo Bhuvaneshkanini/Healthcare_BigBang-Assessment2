@@ -1,4 +1,6 @@
 ﻿using BigBang_Assessment2_Healthcare_.Models;
+
+using BigBang_Assessment2_Healthcare_.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,51 +13,42 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorController(ApplicationDbContext context)
+        public DoctorController(IDoctorRepository doctorRepository)
         {
-            _context = context;
+            _doctorRepository = doctorRepository;
         }
-
-        // GET: api/Doctor
+       // GET: api/Doctor
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctors()
         {
-            var doctors = await _context.Doctors
-                .Include(d => d.Patients) // Include the related patients
-                .ToListAsync();
-
+            var doctors = await _doctorRepository.GetAllDoctorsAsync();
             return doctors;
         }
-
-        // GET: api/Doctor/5
+        // GET: api/Doctor/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Doctor>> GetDoctor(int id)
+        public async Task<ActionResult<Doctor>> GetDoctorById(int id)
         {
-            var doctor = await _context.Doctors
-                .Include(d => d.Patients) // Include the related patients
-                .FirstOrDefaultAsync(d => d.DoctorId == id);
+            var doctor = await _doctorRepository.GetDoctorByIdAsync(id);
 
             if (doctor == null)
             {
                 return NotFound();
             }
 
-            return doctor;
+            return Ok(doctor);
         }
 
         // POST: api/Doctor
         [HttpPost]
         public async Task<ActionResult<Doctor>> CreateDoctor(Doctor doctor)
         {
-            _context.Doctors.Add(doctor);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetDoctor), new { id = doctor.DoctorId }, doctor);
+            var createdDoctor = await _doctorRepository.CreateDoctorAsync(doctor);
+            return CreatedAtAction(nameof(GetDoctorById), new { id = createdDoctor.DoctorId }, createdDoctor);
         }
 
-        // PUT: api/Doctor/5
+        // PUT: api/Doctor/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDoctor(int id, Doctor doctor)
         {
@@ -64,46 +57,29 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(doctor).State = EntityState.Modified;
+            var updated = await _doctorRepository.UpdateDoctorAsync(doctor);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DoctorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // DELETE: api/Doctor/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDoctor(int id)
-        {
-            var doctor = await _context.Doctors.FindAsync(id);
-            if (doctor == null)
+            if (!updated)
             {
                 return NotFound();
             }
 
-            _context.Doctors.Remove(doctor);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
-        private bool DoctorExists(int id)
+        // DELETE: api/Doctor/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDoctor(int id)
         {
-            return _context.Doctors.Any(d => d.DoctorId == id);
+            var deleted = await _doctorRepository.DeleteDoctorAsync(id);
+
+            if (!deleted)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }
+

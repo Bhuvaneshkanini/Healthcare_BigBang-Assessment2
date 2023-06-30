@@ -1,4 +1,5 @@
 ﻿using BigBang_Assessment2_Healthcare_.Models;
+using BigBang_Assessment2_Healthcare_.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,34 +12,29 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
 
-        public PatientController(ApplicationDbContext context)
+        private readonly IPatientRepo _patientRepository;
+
+        public PatientController(IPatientRepo patientRepository)
         {
-            _context = context;
+            _patientRepository = patientRepository;
         }
 
         // GET: api/Patient
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
         {
-            var patients = await _context.Patients
-                .Include(p => p.Doctors) // Include the related doctor
-                .ToListAsync();
-
+            var patients = await _patientRepository.GetAllPatientsAsync();
             return patients;
         }
 
-        // GET: api/Patient/5
+        // GET: api/Patient/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> GetPatient(int id)
         {
-            var patient = await _context.Patients.FindAsync(id);
-
+            var patient = await _patientRepository.GetPatientByIdAsync(id);
             if (patient == null)
-            {
                 return NotFound();
-            }
 
             return patient;
         }
@@ -47,61 +43,33 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
         [HttpPost]
         public async Task<ActionResult<Patient>> CreatePatient(Patient patient)
         {
-            _context.Patients.Add(patient);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetPatient), new { id = patient.PatientId }, patient);
+            var createdPatient = await _patientRepository.CreatePatientAsync(patient);
+            return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.PatientId }, createdPatient);
         }
 
-        // PUT: api/Patient/5
+        // PUT: api/Patient/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePatient(int id, Patient patient)
         {
             if (id != patient.PatientId)
-            {
                 return BadRequest();
-            }
 
-            _context.Entry(patient).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var success = await _patientRepository.UpdatePatientAsync(patient);
+            if (!success)
+                return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/Patient/5
+        // DELETE: api/Patient/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePatient(int id)
         {
-            var patient = await _context.Patients.FindAsync(id);
-            if (patient == null)
-            {
+            var success = await _patientRepository.DeletePatientAsync(id);
+            if (!success)
                 return NotFound();
-            }
-
-            _context.Patients.Remove(patient);
-            await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool PatientExists(int id)
-        {
-            return _context.Patients.Any(p => p.PatientId == id);
         }
     }
 }

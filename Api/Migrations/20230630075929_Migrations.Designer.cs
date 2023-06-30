@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigBang_Assessment2_Healthcare_.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230630062916_Migrations")]
+    [Migration("20230630075929_Migrations")]
     partial class Migrations
     {
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LasttName")
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
