@@ -2,6 +2,8 @@
 using BigBang_Assessment2_Healthcare_.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace BigBang_Assessment2_Healthcare_
 {
@@ -19,6 +21,10 @@ namespace BigBang_Assessment2_Healthcare_
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("connection")) );
+
+
+            builder.Services.AddControllers().AddNewtonsoftJson(Options => Options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
             var app = builder.Build();
 

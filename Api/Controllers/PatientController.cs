@@ -22,7 +22,11 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
         {
-            return await _context.Patients.ToListAsync();
+            var patients = await _context.Patients
+                .Include(p => p.Doctors) // Include the related doctor
+                .ToListAsync();
+
+            return patients;
         }
 
         // GET: api/Patient/5

@@ -22,14 +22,20 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctors()
         {
-            return await _context.Doctors.ToListAsync();
+            var doctors = await _context.Doctors
+                .Include(d => d.Patients) // Include the related patients
+                .ToListAsync();
+
+            return doctors;
         }
 
         // GET: api/Doctor/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Doctor>> GetDoctor(int id)
         {
-            var doctor = await _context.Doctors.FindAsync(id);
+            var doctor = await _context.Doctors
+                .Include(d => d.Patients) // Include the related patients
+                .FirstOrDefaultAsync(d => d.DoctorId == id);
 
             if (doctor == null)
             {

@@ -12,10 +12,15 @@ namespace BigBang_Assessment2_Healthcare_.Models
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
 
-        public DbSet<DoctorPatient> DoctorPatients { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Doctor>()
+                .HasMany(d => d.Patients)
+                .WithMany(p => p.Doctors)
+                .UsingEntity(j => j.ToTable("DoctorPatient"));
 
-
-       
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }
