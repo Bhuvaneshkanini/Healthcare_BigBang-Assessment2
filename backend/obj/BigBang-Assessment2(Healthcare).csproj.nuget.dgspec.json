@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\kanini\\Healthcare_BigBang-Assessment2\\Api\\BigBang-Assessment2(Healthcare).csproj": {}
+    "D:\\kanini\\Healthcare_BigBang-Assessment2\\backend\\BigBang-Assessment2(Healthcare).csproj": {}
   },
   "projects": {
-    "D:\\kanini\\Healthcare_BigBang-Assessment2\\Api\\BigBang-Assessment2(Healthcare).csproj": {
+    "D:\\kanini\\Healthcare_BigBang-Assessment2\\backend\\BigBang-Assessment2(Healthcare).csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\kanini\\Healthcare_BigBang-Assessment2\\Api\\BigBang-Assessment2(Healthcare).csproj",
+        "projectUniqueName": "D:\\kanini\\Healthcare_BigBang-Assessment2\\backend\\BigBang-Assessment2(Healthcare).csproj",
         "projectName": "BigBang-Assessment2(Healthcare)",
-        "projectPath": "D:\\kanini\\Healthcare_BigBang-Assessment2\\Api\\BigBang-Assessment2(Healthcare).csproj",
+        "projectPath": "D:\\kanini\\Healthcare_BigBang-Assessment2\\backend\\BigBang-Assessment2(Healthcare).csproj",
         "packagesPath": "C:\\Users\\kalaivani\\.nuget\\packages\\",
-        "outputPath": "D:\\kanini\\Healthcare_BigBang-Assessment2\\Api\\obj\\",
+        "outputPath": "D:\\kanini\\Healthcare_BigBang-Assessment2\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kalaivani\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -19,6 +19,10 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public string? Address { get; set; }
 
+        public int? UserId { get; set; }
+
+        public User? Users { get; set; }
+
         public ICollection<Doctor>? Doctors { get; set; }
 
     }

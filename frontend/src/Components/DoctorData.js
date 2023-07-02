@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext,useEffect, useState } from 'react';
 import { Home } from './Home';
+import MyCard, { Cardone } from './Card';
+
+export const DoctorContext = createContext();
+  
 
 export function Doctor() {
   const [doctors, setDoctors] = useState([]);
 
+
+ 
   useEffect(() => {
     fetchDoctors();
   }, []);
@@ -20,9 +26,8 @@ export function Doctor() {
 
   return (
     <div>
-        <Home></Home>
       <h1>Doctors</h1>
-      <ul>
+      {/*<ul>
         {doctors.map(doctor => (
           <li key={doctor.doctorId}>
             <li>{doctor.firstName}</li>
@@ -30,7 +35,10 @@ export function Doctor() {
             <li>{doctor.age}</li>
           </li>
         ))}
-      </ul>
+        </ul>*/}
+      <DoctorContext.Provider value={doctors}>
+          <MyCard></MyCard>
+      </DoctorContext.Provider>
     </div>
   );
 }

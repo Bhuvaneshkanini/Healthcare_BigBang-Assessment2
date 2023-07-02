@@ -28,22 +28,28 @@ export const Nav = () => {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/patient">
+                <Link class="nav-link active" aria-current="page" to="/">
                   Patient
                 </Link>
               </li>
-              
+              <li class="nav-item">
+                <Link class="nav-link active" aria-current="page" to="/appointment">
+                  Appointment
+                </Link>
+              </li>
             </ul>
             <form class="d-flex" role="search">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+                <li class="nav-item">
                   <Link class="nav-link active" aria-current="page" to="/about">
                     About us
                   </Link>
                 </li>
                 <li class="nav-item">
-                  <Link class="nav-link active" aria-current="page" to="/">
-                    Logout
+                  <Link class="nav-link active" aria-current="page" to="/login">
+                    <button type="button" class="btn btn-primary">
+                      Login
+                    </button>
                   </Link>
                 </li>
               </ul>

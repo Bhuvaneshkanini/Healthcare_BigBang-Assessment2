@@ -43,7 +43,6 @@ function AddDoctor() {
 
   return (
     <div>
-        <Home></Home>
       <h1>Add Doctor</h1>
       <form onSubmit={handleSubmit}>
         <div>

@@ -68,7 +68,14 @@ export const Login = () => {
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
               ];
             console.log(role); 
-            usenavigate("/Home")
+            if(role=="doctor")
+            {
+              usenavigate("/doctor")
+            }
+            else{
+              usenavigate("/admin")
+            }
+            
             
             
           }

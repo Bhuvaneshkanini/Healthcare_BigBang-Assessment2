@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qAm2mzgm4CRJsKjmz9iVO89PO7wSLC9Q8JzMkcUjw8rvDWimtzMrShd8suLxpTOaSh0uG81zploVacA0Cedatg==",
+  "dgSpecHash": "zGC2IWo2sH0K+zb0NJZOdfjVPrXk9CIdkZGsDYEJQz+KjskmoN6YTGbq7OFiIbML/6fmcglPQmEbCfc//V7YEw==",
   "success": true,
-  "projectFilePath": "D:\\kanini\\Healthcare_BigBang-Assessment2\\Api\\BigBang-Assessment2(Healthcare).csproj",
+  "projectFilePath": "D:\\kanini\\Healthcare_BigBang-Assessment2\\backend\\BigBang-Assessment2(Healthcare).csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kalaivani\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\kalaivani\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

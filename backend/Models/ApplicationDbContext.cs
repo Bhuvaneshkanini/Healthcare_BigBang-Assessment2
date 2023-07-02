@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BigBang_Assessment2_Healthcare_.Models.BigBang_Assessment2_Healthcare_.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BigBang_Assessment2_Healthcare_.Models
 {
@@ -13,6 +14,8 @@ namespace BigBang_Assessment2_Healthcare_.Models
         public DbSet<Specialization> Specializations { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Appointment> Appointments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
