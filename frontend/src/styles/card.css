@@ -7,3 +7,7 @@
   .custom-button:hover {
     background-color: #eaeaea;
   }
+
+  .label-left {
+    text-align: left;
+  }

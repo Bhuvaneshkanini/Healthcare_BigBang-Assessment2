@@ -4,9 +4,9 @@ import { Nav } from "./Nav";
 
 
 import "../styles/home.css";
-import img from "../assets/image/frame.jpg";
 import { Content } from "./Content";
 import { Appointment } from "./Appointment";
+import { DoctorDataCards } from "./DoctorDataCards";
 
 export const Home = () => {
      
@@ -27,13 +27,13 @@ export const Home = () => {
               </h1>
               <div className="pt-2">
                 <a
-                  href=""
+                  href="#appointment"
                   className="btn btn-light rounded-pill py-md-3 px-md-5 mx-2"
                 >
                   Find Doctor
                 </a>
                 <a
-                  href=""
+                  href="#appointment"
                   className="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2"
                 >
                   Appointment
@@ -48,6 +48,10 @@ export const Home = () => {
 
       <Appointment></Appointment>
 
+      <div className="container py-5">
+      <DoctorDataCards></DoctorDataCards>
+      </div>
+      
       <Footer></Footer>
     </div>
   );

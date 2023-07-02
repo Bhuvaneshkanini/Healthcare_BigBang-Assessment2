@@ -68,16 +68,22 @@ export const Login = () => {
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
               ];
             console.log(role); 
-            if(role=="doctor")
+            if(resp.token)
             {
-              usenavigate("/doctor")
+              if(role=="doctor")
+            {
+              usenavigate("/doctor");
+            }
+            else if(role=="patient"){
+              usenavigate("/logged-in");
             }
             else{
               usenavigate("/admin")
             }
-            
-            
-            
+            }
+            else{
+              toast.error("invalid credentials");
+            }
           }
         })
         .catch((err) => {

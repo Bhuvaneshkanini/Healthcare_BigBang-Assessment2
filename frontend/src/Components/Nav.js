@@ -33,24 +33,32 @@ export const Nav = () => {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/appointment">
+                <a class="nav-link" href="#appointment">
                   Appointment
-                </Link>
+                </a>
               </li>
             </ul>
             <form class="d-flex" role="search">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <Link class="nav-link active" aria-current="page" to="/about">
-                    About us
-                  </Link>
-                </li>
-                <li class="nav-item">
-                  <Link class="nav-link active" aria-current="page" to="/login">
-                    <button type="button" class="btn btn-primary">
-                      Login
-                    </button>
-                  </Link>
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <div className="d-flex align-items-center">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/about"
+                    >
+                      About us
+                    </Link>
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/login"
+                    >
+                      <button type="button" className="btn btn-primary">
+                        Sign in
+                      </button>
+                    </Link>
+                  </div>
                 </li>
               </ul>
             </form>

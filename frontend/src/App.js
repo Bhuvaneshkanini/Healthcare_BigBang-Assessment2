@@ -1,9 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import { BrowserRouter,Route, Routes } from "react-router-dom";
+import { BrowserRouter,Route, Routes,useLocation } from "react-router-dom";
 
-import { Doctor } from "./components/DoctorData";
+import { DoctorDataCards } from "./components/DoctorDataCards";
 import AddDoctor from "./components/DoctorAddData";
 import { Login } from "./components/Login";
 import { Home } from "./components/Home";
@@ -18,16 +18,27 @@ import { Doctordash } from "./components/DoctorDashboard";
 import { Appointment } from "./components/Appointment";
 import AppointmentForm from "./components/AppointmentForm";
 import { Card } from "./components/Card";
+import { useEffect } from 'react';
+
 
 
 function App() {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      sessionStorage.clear();
+    }
+  }, [location.pathname]);
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
-          <Route path="/Under" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/doctor" element={<Doctordash />} />
@@ -35,7 +46,8 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/appointment" element={<AppointmentForm />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Doctor></Doctor>}></Route>
+          <Route path="/Under" element={<DoctorDataCards></DoctorDataCards>}></Route>
+          <Route path="/logged-in" element={<Home></Home>}></Route>
 
         </Routes>
       </BrowserRouter>

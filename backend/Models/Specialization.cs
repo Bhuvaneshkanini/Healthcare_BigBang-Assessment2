@@ -11,6 +11,6 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public string? Description { get; set; }
 
-        public ICollection<Doctor>? Specializations { get; set; }
+        public ICollection<Doctor>? Doctors { get; set; }
     }
 }

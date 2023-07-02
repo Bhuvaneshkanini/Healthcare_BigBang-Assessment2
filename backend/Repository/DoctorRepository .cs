@@ -14,7 +14,7 @@ namespace BigBang_Assessment2_Healthcare_.Repository
 
         public async Task<List<Doctor>> GetAllDoctorsAsync()
         {
-            return await _context.Doctors.ToListAsync();
+            return await _context.Doctors.Include(d => d.Specializations).ToListAsync();
         }
 
         public async Task<Doctor> GetDoctorByIdAsync(int id)
