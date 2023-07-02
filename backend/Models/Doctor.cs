@@ -15,11 +15,11 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public int SpecializationID { get; set; }
 
-        public Specialization ?Specializations { get; set; }
+        public Specialization? Specializations { get; set; }
 
         public string? Email { get; set; }
 
-        public string? Phone { get; set;}
+        public string? Phone { get; set; }
 
         public string? Education { get; set; }
 
@@ -29,15 +29,14 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public string? Description { get; set; }
 
-        public string? status { get; set; }
+        public string? Status { get; set; }
 
         public int? UserId { get; set; }
 
         public User? Users { get; set; }
 
+        public byte[]? Image { get; set; }
 
         public ICollection<Patient>? Patients { get; set; }
-
-
     }
 }

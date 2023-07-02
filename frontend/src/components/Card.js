@@ -10,7 +10,11 @@ const MyCard = () => {
         {doctors.map((doctor) => (
           <div key={doctor.doctorId} className="col">
             <div className="card custom-card" style={{ width: '25rem' }}>
-              <img src={doctor.image} className="card-img-top" alt="Doctor" />
+              <img
+                src={`data:image/jpeg;base64,${doctor.image}`}
+                className="card-img-top"
+                alt="Doctor"
+              />
               <div className="card-body">
                 <h5 className="card-title">
                   {doctor.firstName} {doctor.lastName}

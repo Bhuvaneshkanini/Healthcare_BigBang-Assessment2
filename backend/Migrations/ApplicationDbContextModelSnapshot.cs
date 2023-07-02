@@ -83,6 +83,9 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,11 +95,11 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<int>("SpecializationID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
-
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DoctorId");
 
