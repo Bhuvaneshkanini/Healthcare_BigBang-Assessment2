@@ -9,10 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 import jwt_decode from "jwt-decode";
 
+
+
 export const Login = () => {
   const [username, usernameupdate] = useState("");
   const [password, passwordupdate] = useState("");
-
+  const role="";
   const usenavigate = useNavigate();
 
   useEffect(() => {
@@ -75,7 +77,7 @@ export const Login = () => {
               usenavigate("/doctor");
             }
             else if(role=="patient"){
-              usenavigate("/logged-in");
+              usenavigate("/patient");
             }
             else{
               usenavigate("/admin")
@@ -87,7 +89,6 @@ export const Login = () => {
           }
         })
         .catch((err) => {
-          //window.alert("Login Failed due to :" + err.message);
           toast.error("Login Failed due to :" + err.message);
         });
     }

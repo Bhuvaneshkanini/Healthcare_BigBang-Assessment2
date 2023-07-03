@@ -9,18 +9,17 @@ import { Appointment } from "./Appointment";
 import { DoctorDataCards } from "./DoctorDataCards";
 
 export const Home = () => {
-     
-
+  const token = sessionStorage.getItem("jwttoken");
+  console.log(token);
   return (
     <div>
       <Nav></Nav>
-
       <div className="container-fluid bg-primary py-5 mb-5 background">
         <div className="container py-5">
           <div className="row justify-content-start">
             <div className="col-lg-8 text-center text-lg-start">
               <h5 className="d-inline-block text-primary text-uppercase border-bottom border-5">
-                Welcome To Medinova
+                Welcome To Healthcare
               </h5>
               <h1 className="display-1 text-white mb-md-4">
                 Best Healthcare Solution In Your City
@@ -47,10 +46,6 @@ export const Home = () => {
       <Content></Content>
 
       <Appointment></Appointment>
-
-      <div className="container py-5">
-      <DoctorDataCards></DoctorDataCards>
-      </div>
       
       <Footer></Footer>
     </div>

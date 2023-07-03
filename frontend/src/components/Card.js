@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DoctorContext } from './DoctorDataCards';
-import '../styles/card.css'
+import '../styles/card.css';
 
 const MyCard = () => {
   const doctors = useContext(DoctorContext);
@@ -30,11 +30,11 @@ const MyCard = () => {
   };
 
   const filteredDoctors = doctors.filter(doctor => {
+    const isActive = doctor.status === 'Active';
     const isSpecializationMatch = selectedSpecialization === '' || doctor.specializationID === parseInt(selectedSpecialization);
     const isNameMatch = searchQuery === '' || doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || doctor.lastName.toLowerCase().includes(searchQuery.toLowerCase());
-    return isSpecializationMatch && isNameMatch;
+    return isActive && isSpecializationMatch && isNameMatch;
   });
-
 
   return (
     <div className="container">
@@ -51,49 +51,50 @@ const MyCard = () => {
       </div>
 
       <div className="filter">
-      <div class="mb-3">
-        <label class="form-label">Search by Name:</label>
-        <input
-          id="searchQuery"
-          class="form-control"
-          type="text"
-          value={searchQuery}
-          onChange={handleSearchQueryChange}
-          placeholder="Enter name..."
-        />
+        <div class="mb-3">
+          <label class="form-label">Search by Name:</label>
+          <input
+            id="searchQuery"
+            class="form-control"
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchQueryChange}
+            placeholder="Enter name..."
+          />
         </div>
       </div>
 
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {filteredDoctors.map((doctor) => {
-            const specializationName = getSpecializationName(doctor.specializationID);
-            return(
-          <div key={doctor.doctorId} className="col">
-            <div className="card custom-card" style={{ width: '20rem' }}>
-              <img
-                src={`data:image/jpeg;base64,${doctor.image}`}
-                className="card-img-top"
-                style={{ height: '15rem' }}
-                alt="Doctor"
-              />
-              <div className="card-body">
-                <h5 className="card-title">
-                  {doctor.firstName} {doctor.lastName}
-                </h5>
-                <p className="card-text">Specialization: {specializationName}</p>
-                <p className="card-text">Specialization: {doctor.specializationID}</p>
-                <p className="card-text">Education: {doctor.education}</p>
-                <p className="card-text">Experience: {doctor.experience} years</p>
-              </div>
-              <div className="card-footer">
-                <div className="card-buttons">
-                  <button className="btn btn-primary custom-button">View Profile</button>
-                  <button className="btn btn-secondary custom-button">Book Appointment</button>
+          const specializationName = getSpecializationName(doctor.specializationID);
+          return (
+            <div key={doctor.doctorId} className="col">
+              <div className="card custom-card" style={{ width: '20rem' }}>
+                <img
+                  src={`data:image/jpeg;base64,${doctor.image}`}
+                  className="card-img-top"
+                  style={{ height: '15rem' }}
+                  alt="Doctor"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    {doctor.firstName} {doctor.lastName}
+                  </h5>
+                  <p className="card-text">Specialization: {specializationName}</p>
+                  <p className="card-text">Specialization: {doctor.specializationID}</p>
+                  <p className="card-text">Education: {doctor.education}</p>
+                  <p className="card-text">Experience: {doctor.experience} years</p>
+                </div>
+                <div className="card-footer">
+                  <div className="card-buttons">
+                    <button className="btn btn-primary custom-button">View Profile</button>
+                    <button className="btn btn-secondary custom-button">Book Appointment</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )})}
+          )
+        })}
       </div>
     </div>
   );

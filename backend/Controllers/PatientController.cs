@@ -1,8 +1,10 @@
 ﻿using BigBang_Assessment2_Healthcare_.Models;
 using BigBang_Assessment2_Healthcare_.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,14 +22,14 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             _patientRepository = patientRepository;
         }
 
-        // GET: api/Patient
+        [Authorize(Roles = "doctor,admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
         {
             var patients = await _patientRepository.GetAllPatientsAsync();
             return patients;
         }
-
+        [Authorize(Roles = "doctor,admin")]
         // GET: api/Patient/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> GetPatient(int id)
@@ -39,7 +41,6 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             return patient;
         }
 
-        // POST: api/Patient
         [HttpPost]
         public async Task<ActionResult<Patient>> CreatePatient(Patient patient)
         {
@@ -47,7 +48,7 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.PatientId }, createdPatient);
         }
 
-        // PUT: api/Patient/{id}
+        [Authorize(Roles = "patient,admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePatient(int id, Patient patient)
         {
@@ -60,7 +61,7 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
 
             return NoContent();
         }
-
+        [Authorize(Roles = "patient,admin")]
         // DELETE: api/Patient/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePatient(int id)

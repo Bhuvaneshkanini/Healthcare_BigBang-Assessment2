@@ -1,7 +1,19 @@
 import { Route, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 export const Nav = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = sessionStorage.getItem("jwttoken");
+    setIsLoggedIn(token !== null);
+  }, []);
+
+  const handleSignOut = () => {
+    sessionStorage.removeItem("jwttoken");
+    setIsLoggedIn(false);
+  };
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -28,15 +40,11 @@ export const Nav = () => {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/">
+                <Link class="nav-link active" aria-current="page" to="/patient">
                   Patient
                 </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#appointment">
-                  Appointment
-                </a>
-              </li>
+              
             </ul>
             <form class="d-flex" role="search">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -49,15 +57,22 @@ export const Nav = () => {
                     >
                       About us
                     </Link>
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/login"
-                    >
-                      <button type="button" className="btn btn-primary">
-                        Sign in
-                      </button>
-                    </Link>
+                    {isLoggedIn ? (
+                      <Link to="/">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleSignOut}
+                      >
+                        Sign out
+                      </button></Link>
+                    ) : (
+                      <Link className="nav-link active" aria-current="page" to="/login">
+                        <button type="button" className="btn btn-primary">
+                          Sign in
+                        </button>
+                      </Link>
+                    )}
                   </div>
                 </li>
               </ul>

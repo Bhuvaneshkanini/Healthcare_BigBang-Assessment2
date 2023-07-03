@@ -83,8 +83,8 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -134,12 +134,7 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("PatientId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Patients");
                 });
@@ -231,15 +226,6 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                         .IsRequired();
 
                     b.Navigation("Specializations");
-                });
-
-            modelBuilder.Entity("BigBang_Assessment2_Healthcare_.Models.Patient", b =>
-                {
-                    b.HasOne("BigBang_Assessment2_Healthcare_.Models.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("DoctorPatient", b =>

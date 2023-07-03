@@ -11,13 +11,15 @@ import { About } from "./components/About";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { AdminDashboard } from "./components/AdminDashboard";
-import { Doctordash } from "./components/DoctorDashboard";
+import { Doctordash } from "./components/PatientDashboard";
 
 import { Appointment } from "./components/Appointment";
 import AppointmentForm from "./components/AppointmentForm";
 import { Card } from "./components/Card";
 import AddSpecialization from "./components/AddSpecilization";
 import ViewSpecializations from "./components/ViewSpecialization";
+import { PatientDashboard } from "./components/PatientDashboard";
+import { DoctorDashboard } from "./components/DoctorsDashboard";
 
 
 function App() {
@@ -30,9 +32,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/doctor" element={<Doctordash />} />
-          <Route path="/patient" element={<AddDoctor />} />
+          <Route path="/Home1" element={<Home />} />
+          
+          <Route path="/doctor" element={<DoctorDashboard />} />
+          <Route path="/patient" element={<PatientDashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/Doctorview" element={<AdminDashboard />} />
           

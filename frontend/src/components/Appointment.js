@@ -37,10 +37,9 @@ export const Appointment = () => {
           <div className="col-lg-6">
             <div className="bg-white text-center rounded p-5">
               <h1 className="mb-4">Book An Appointment</h1>
-              <img
-                src={content2}
-                style={{ height: "25rem", width: "33rem" }}
-              ></img>
+              <div className="col-lg-12 mb-5 mb-lg-0">
+            <img className="w-100 h-100 rounded" src={content2} alt="img" />
+          </div>
             </div>
           </div>
         </div>

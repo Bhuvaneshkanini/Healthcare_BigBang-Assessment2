@@ -13,11 +13,21 @@ export function DoctorDataCards() {
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch("http://localhost:5193/api/Doctor");
-      const data = await response.json();
-      setDoctors(data);
+      let jwttoken = sessionStorage.getItem("jwttoken");
+      const response = await fetch("http://localhost:5193/api/Doctor", {
+        headers: {
+          Authorization: "bearer " + jwttoken,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setDoctors(data);
+      } else {
+        console.error("Error fetching students:", response.statusText);
+        window.alert("Unauthorized");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching students:", error);
     }
   };
 
@@ -29,7 +39,7 @@ export function DoctorDataCards() {
         </h1>
       </div>
       <div className="mb-4">
-        <h2 className="display-4" id="appointment">
+        <h2 className="display-4">
           Choose The Best Doctors
         </h2>
       </div>
