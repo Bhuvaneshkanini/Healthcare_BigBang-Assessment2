@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-
 import { BrowserRouter,Route, Routes,useLocation } from "react-router-dom";
 
 import { DoctorDataCards } from "./components/DoctorDataCards";
@@ -18,19 +16,11 @@ import { Doctordash } from "./components/DoctorDashboard";
 import { Appointment } from "./components/Appointment";
 import AppointmentForm from "./components/AppointmentForm";
 import { Card } from "./components/Card";
-import { useEffect } from 'react';
-
+import AddSpecialization from "./components/AddSpecilization";
+import ViewSpecializations from "./components/ViewSpecialization";
 
 
 function App() {
-
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      sessionStorage.clear();
-    }
-  }, [location.pathname]);
 
   return (
     <div className="App">
@@ -44,11 +34,14 @@ function App() {
           <Route path="/doctor" element={<Doctordash />} />
           <Route path="/patient" element={<AddDoctor />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/Doctorview" element={<AdminDashboard />} />
+          
           <Route path="/appointment" element={<AppointmentForm />} />
+          <Route path="/addspecialization" element={<AddSpecialization />} />
+          <Route path="/viewspecialization" element={<ViewSpecializations />} />
           <Route path="/register" element={<Register />} />
           <Route path="/Under" element={<DoctorDataCards></DoctorDataCards>}></Route>
           <Route path="/logged-in" element={<Home></Home>}></Route>
-
         </Routes>
       </BrowserRouter>
     </div>

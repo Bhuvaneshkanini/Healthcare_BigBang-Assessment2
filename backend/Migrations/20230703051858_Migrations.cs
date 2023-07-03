@@ -50,6 +50,7 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
+                    gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SpecializationID = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -58,8 +59,7 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,11 +70,6 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                         principalTable: "Specializations",
                         principalColumn: "SpecializationId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Doctors_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -173,11 +168,6 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                 name: "IX_Doctors_SpecializationID",
                 table: "Doctors",
                 column: "SpecializationID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Doctors_UserId",
-                table: "Doctors",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_UserId",

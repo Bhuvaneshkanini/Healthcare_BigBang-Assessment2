@@ -13,6 +13,8 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public int Age { get; set; }
 
+        public string? gender { get; set; }
+
         public int SpecializationID { get; set; }
 
         public Specialization? Specializations { get; set; }
@@ -31,11 +33,7 @@ namespace BigBang_Assessment2_Healthcare_.Models
 
         public string? Status { get; set; }
 
-        public int? UserId { get; set; }
-
-        public User? Users { get; set; }
-
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
 
         public ICollection<Patient>? Patients { get; set; }
     }

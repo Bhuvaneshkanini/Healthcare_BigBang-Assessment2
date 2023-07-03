@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigBang_Assessment2_Healthcare_.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230702061459_Migrations")]
+    [Migration("20230703051858_Migrations")]
     partial class Migrations
     {
         /// <inheritdoc />
@@ -86,8 +86,8 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -101,14 +101,12 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DoctorId");
 
                     b.HasIndex("SpecializationID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
                 });
@@ -230,18 +228,12 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
             modelBuilder.Entity("BigBang_Assessment2_Healthcare_.Models.Doctor", b =>
                 {
                     b.HasOne("BigBang_Assessment2_Healthcare_.Models.Specialization", "Specializations")
-                        .WithMany("Specializations")
+                        .WithMany("Doctors")
                         .HasForeignKey("SpecializationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BigBang_Assessment2_Healthcare_.Models.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Specializations");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("BigBang_Assessment2_Healthcare_.Models.Patient", b =>
@@ -270,7 +262,7 @@ namespace BigBang_Assessment2_Healthcare_.Migrations
 
             modelBuilder.Entity("BigBang_Assessment2_Healthcare_.Models.Specialization", b =>
                 {
-                    b.Navigation("Specializations");
+                    b.Navigation("Doctors");
                 });
 #pragma warning restore 612, 618
         }
