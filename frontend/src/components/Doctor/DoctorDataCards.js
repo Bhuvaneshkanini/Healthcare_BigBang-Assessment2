@@ -1,12 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Home } from "./Home";
 import MyCard, { Cardone } from "./Card";
+import { AdminDoctorDashboard } from "../Admin/AdminDoctorDashboard";
+import { useNavigate } from "react-router-dom";
 
 export const DoctorContext = createContext();
 
 export function DoctorDataCards() {
   const [doctors, setDoctors] = useState([]);
-
+  const UseNavigate=useNavigate();
+  const val=1;
   useEffect(() => {
     fetchDoctors();
   }, []);
@@ -24,13 +26,14 @@ export function DoctorDataCards() {
         setDoctors(data);
       } else {
         console.error("Error fetching students:", response.statusText);
-        window.alert("Unauthorized");
+        UseNavigate("/unauthorized")
+        //window.alert("Unauthorized");
       }
     } catch (error) {
       console.error("Error fetching students:", error);
     }
   };
-
+  console.log(doctors.length);
   return (
     <div>
       <div className="mb-4">
@@ -43,18 +46,14 @@ export function DoctorDataCards() {
           Choose The Best Doctors
         </h2>
       </div>
-      {/*<ul>
-        {doctors.map(doctor => (
-          <li key={doctor.doctorId}>
-            <li>{doctor.firstName}</li>
-            <li>{doctor.lastName}</li>
-            <li>{doctor.age}</li>
-          </li>
-        ))}
-        </ul>*/}
-      <DoctorContext.Provider value={doctors}>
-        <MyCard></MyCard>
-      </DoctorContext.Provider>
+      {doctors.length > 0 ? (
+        
+        <DoctorContext.Provider value={doctors}>
+          <MyCard />
+        </DoctorContext.Provider>
+      ) : (
+        <p>No doctors available.</p>
+      )}
     </div>
   );
 }

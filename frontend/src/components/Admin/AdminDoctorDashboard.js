@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { Adminnav } from "./adminnav";
 
-export const AdminDashboard = () => {
+export const AdminDoctorDashboard = () => {
   const [Doctors, setDoctors] = useState([]);
+  const [specializations, setSpecializations] = useState([]);
 
   useEffect(() => {
     fetchDoctors();
+    fetchSpecializations();
   }, []);
 
   const fetchDoctors = async () => {
@@ -107,8 +109,24 @@ export const AdminDashboard = () => {
     }
   };
 
-  const updateDoctor = async (DoctorId, updatedData) => {
-    // Implement the updateDoctor functionality
+  const fetchSpecializations = async () => {
+    try {
+      const response = await fetch("http://localhost:5193/api/Specialization");
+      if (response.ok) {
+        const data = await response.json();
+        setSpecializations(data);
+      } else {
+        console.error("Error fetching specializations:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching specializations:", error);
+    }
+  };
+
+  const getSpecializationName = (specializationId) => {
+    //console.log(specializations)
+    const specialization = specializations.find(spec => spec.specializationId === specializationId);
+    return specialization ? specialization.name : '';
   };
 
   return (
@@ -118,26 +136,38 @@ export const AdminDashboard = () => {
       <table className="table table-bordered">
         <thead>
           <tr>
+            <th>Doctor ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Age</th>
             <th>Gender</th>
-            <th>City</th>
+            <th>Phone</th>
             <th>Specialization</th>
+            <th>View Pofile</th>
             <th>Status</th>
             <th>Delete</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {Doctors.map((Doctor) => (
+          {Doctors.map((Doctor) =>{
+          const specializationName = getSpecializationName(Doctor.specializationID);
+          //console.log(specializationName)
+          return(
             <tr key={Doctor.doctorId}>
+              <td>{Doctor.doctorId}</td>
               <td>{Doctor.firstName}</td>
               <td>{Doctor.lastName}</td>
               <td>{Doctor.age}</td>
               <td>{Doctor.gender}</td>
-              <td>{Doctor.city}</td>
-              <td>{Doctor.specialization}</td>
+              <td>{Doctor.phone}</td>
+              <td>{getSpecializationName(Doctor.specializationID)}</td>
+              <td><button
+                  className="btn btn-primary"
+                >
+                  View
+                </button>
+              </td>
               <td>{Doctor.status}</td>
               <td>
                 <button
@@ -164,7 +194,7 @@ export const AdminDashboard = () => {
                 </button>
               </td>
             </tr>
-          ))}
+          )})}
         </tbody>
       </table>
     </div>

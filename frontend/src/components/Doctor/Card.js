@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DoctorContext } from './DoctorDataCards';
-import '../styles/card.css';
+import { DoctorContext } from '../Doctor/DoctorDataCards';
+
 
 const MyCard = () => {
   const doctors = useContext(DoctorContext);
@@ -79,6 +79,7 @@ const MyCard = () => {
                 <div className="card-body">
                   <h5 className="card-title">
                     {doctor.firstName} {doctor.lastName}
+                    {console.log(doctor.firstName)}
                   </h5>
                   <p className="card-text">Specialization: {specializationName}</p>
                   <p className="card-text">Specialization: {doctor.specializationID}</p>

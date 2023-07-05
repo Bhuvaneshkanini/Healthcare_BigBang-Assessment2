@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Adminnav } from "./adminnav";
+import { Adminnav } from "../Admin/adminnav";
 
 const AddSpecialization = () => {
   const [name, setName] = useState("");

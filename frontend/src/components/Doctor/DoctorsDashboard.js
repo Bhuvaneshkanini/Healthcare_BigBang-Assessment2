@@ -1,5 +1,6 @@
+
 import { DoctorDataCards } from "./DoctorDataCards"
-import { Nav } from "./Nav"
+import { Nav } from "../Nav"
 
 export const DoctorDashboard=()=>{
     return(

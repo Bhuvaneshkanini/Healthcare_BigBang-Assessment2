@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import content2 from "../assets/image/content2.jpg";
-export const Appointment = () => {
+export const Contentlayout = () => {
   return (
     <div className="container-fluid bg-primary my-5 py-5">
       <div className="container py-5">
@@ -21,12 +22,12 @@ export const Appointment = () => {
               existing medical conditions but also to guide you in maintaining
               optimal health and preventing future health issues.
             </p>
-            <a
+            <Link
               className="btn btn-dark rounded-pill py-3 px-5 me-3"
-              href="#appointment"
+              to="/doctor"
             >
               Find Doctor
-            </a>
+            </Link>
             <a
               className="btn btn-outline-dark rounded-pill py-3 px-5"
               href="#appointment"

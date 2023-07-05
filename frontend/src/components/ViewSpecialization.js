@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Adminnav } from "./adminnav";
+import { Adminnav } from "./Admin/adminnav";
 
 const ViewSpecializations = () => {
   const [specializations, setSpecializations] = useState([]);

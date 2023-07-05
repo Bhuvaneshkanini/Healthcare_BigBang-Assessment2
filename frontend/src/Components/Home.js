@@ -2,11 +2,12 @@
 import { Footer } from "./Footer";
 import { Nav } from "./Nav";
 
-
+import { ToastContainer } from "react-toastify";
 import "../styles/home.css";
 import { Content } from "./Content";
-import { Appointment } from "./Appointment";
-import { DoctorDataCards } from "./DoctorDataCards";
+import { Contentlayout } from "./Contentlayout";
+import { DoctorDataCards } from "./Doctor/DoctorDataCards";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const token = sessionStorage.getItem("jwttoken");
@@ -14,6 +15,7 @@ export const Home = () => {
   return (
     <div>
       <Nav></Nav>
+      <ToastContainer />
       <div className="container-fluid bg-primary py-5 mb-5 background">
         <div className="container py-5">
           <div className="row justify-content-start">
@@ -25,12 +27,12 @@ export const Home = () => {
                 Best Healthcare Solution In Your City
               </h1>
               <div className="pt-2">
-                <a
-                  href="#appointment"
+                <Link
+                  to="/doctor"
                   className="btn btn-light rounded-pill py-md-3 px-md-5 mx-2"
                 >
                   Find Doctor
-                </a>
+                </Link>
                 <a
                   href="#appointment"
                   className="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2"
@@ -45,7 +47,7 @@ export const Home = () => {
 
       <Content></Content>
 
-      <Appointment></Appointment>
+      <Contentlayout></Contentlayout>
       
       <Footer></Footer>
     </div>

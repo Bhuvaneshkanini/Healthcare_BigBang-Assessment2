@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigBang_Assessment2_Healthcare_.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230703073004_Migrations")]
+    [Migration("20230705015136_Migrations")]
     partial class Migrations
     {
         /// <inheritdoc />

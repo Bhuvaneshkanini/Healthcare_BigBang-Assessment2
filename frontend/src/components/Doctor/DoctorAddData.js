@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home } from './Home';
+import { Home } from '../Home';
 
 function AddDoctor() {
   const [firstName, setFirstName] = useState('');

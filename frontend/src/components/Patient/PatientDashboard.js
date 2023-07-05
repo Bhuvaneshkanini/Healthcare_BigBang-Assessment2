@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Nav } from './Nav';
+import { Nav } from '../Nav';
+import { useNavigate } from 'react-router-dom';
 
 export const PatientDashboard = () => {
   const [patients, setPatients] = useState([]);
+
+  const UseNavigate=useNavigate();
 
   useEffect(() => {
     fetchPatients();
@@ -21,7 +24,8 @@ export const PatientDashboard = () => {
         setPatients(data);
       } else {
         console.error("Error fetching patients:", response.statusText);
-        window.alert("Unauthorized");
+        UseNavigate("/unauthorized");
+        //window.alert("Unauthorized");
       }
     } catch (error) {
       console.error("Error fetching patients:", error);
@@ -30,7 +34,7 @@ export const PatientDashboard = () => {
 
   return (
     <div>
-      <Nav></Nav>
+      <Nav/>
       <h1>Welcome Patient</h1>
       <table className="table table-bordered">
         <thead>
