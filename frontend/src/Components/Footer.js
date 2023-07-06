@@ -1,5 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faFacebook,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 export const Footer = () => {
   return (
@@ -8,11 +12,13 @@ export const Footer = () => {
         <div className="container p-4">
           <div className="row">
             <div className="col-lg col-md-12 mb-8 mb-md-0">
-              <h5 className="text-uppercase">Footer Content</h5>
+              <h5 className="text-uppercase">Contact Us</h5>
 
               <p>
-                Place your footer content here. You can add any text or
-                components.
+              Best Healthcare Solution In Your City
+              </p>
+              <p>
+              Phone : 04027703521
               </p>
             </div>
 
@@ -30,7 +36,7 @@ export const Footer = () => {
                     <FontAwesomeIcon icon={faFacebook} /> Facebook
                   </a>
                 </li>
-                <li >
+                <li>
                   <a href="#!" className="text-dark">
                     <FontAwesomeIcon icon={faInstagram} /> Instagram
                   </a>
@@ -39,28 +45,13 @@ export const Footer = () => {
             </div>
 
             <div className="col-lg col-md-6 mb-4 mb-md-6">
-              <h5 className="text-uppercase">Follow Us on</h5>
+              <h5 className="text-uppercase">Address</h5>
 
               <ul className="list-unstyled mb-0">
                 <li>
-                  <a href="#!" className="text-dark">
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-dark">
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-dark">
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-dark">
-                    Link 4
-                  </a>
+                  Street: 7-3-696, R P Road City: Hyderabad State/province/area:
+                  Andhra Pradesh  Zip code 500003
+                  Country calling code +91 Country India
                 </li>
               </ul>
             </div>

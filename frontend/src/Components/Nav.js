@@ -1,4 +1,4 @@
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 
 export const Nav = () => {
@@ -16,13 +16,13 @@ export const Nav = () => {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <Link class="navbar-brand" to="/Home">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/Home">
             Home
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -30,23 +30,23 @@ export const Nav = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/doctor">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/doctor">
                   Doctor
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/patient">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/patient">
                   Patient
                 </Link>
               </li>
               
             </ul>
-            <form class="d-flex" role="search">
+            <form className="d-flex" role="search">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <div className="d-flex align-items-center">

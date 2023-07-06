@@ -6,12 +6,10 @@ import { ToastContainer } from "react-toastify";
 import "../styles/home.css";
 import { Content } from "./Content";
 import { Contentlayout } from "./Contentlayout";
-import { DoctorDataCards } from "./Doctor/DoctorDataCards";
+//import { DoctorDataCards } from "./Doctor/DoctorDataCards";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const token = sessionStorage.getItem("jwttoken");
-  console.log(token);
   return (
     <div>
       <Nav></Nav>
@@ -33,12 +31,12 @@ export const Home = () => {
                 >
                   Find Doctor
                 </Link>
-                <a
-                  href="#appointment"
+                <Link
+                  to="/undercontruct"
                   className="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2"
                 >
                   Appointment
-                </a>
+                </Link>
               </div>
             </div>
           </div>

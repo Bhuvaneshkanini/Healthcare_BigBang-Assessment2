@@ -2,9 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-import { toast,ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterTeacher = () => {
@@ -12,39 +11,30 @@ export const RegisterTeacher = () => {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState(null);
   const [gender, setGender] = useState("");
-  const [specializationId, setSpecializationId] = useState(0);
-  const [email, setEmail] = useState("");
+  const [specializationId, setSpecializationId] = useState(null);
   const [phone, setPhone] = useState("");
   const [education, setEducation] = useState("");
-  const [experience, setExperience] = useState(0);
+  const [experience, setExperience] = useState(null);
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("");
-  const [image, setImage] = useState("");
-  const [patients, setPatients] = useState([]);
-
   const navigate = useNavigate();
 
   useEffect(() => {
     sessionStorage.clear();
   }, []);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-  };
-
   const handleRegister = (e) => {
     e.preventDefault();
     if (validateUser()) {
       const userData = {
         userName: username,
-        password:password
+        password: password,
+        userEmail: useremail,
+        role: role,
       };
       fetch("http://localhost:5193/api/User", {
         method: "POST",
@@ -64,7 +54,6 @@ export const RegisterTeacher = () => {
             if (role === "patient") {
               addPatient();
             }
-            //window.alert("Registered Successfully" + resp);
             navigate("/");
           }
         })
@@ -76,23 +65,23 @@ export const RegisterTeacher = () => {
   };
 
   const addDoctor = () => {
-    if (validate()) {
+    if (validateDoctor()) {
       const doctorData = {
-        firstName:firstName,
-        lastName:lastName,
-        age:age,
-        gender:gender,
+        firstName: firstName,
+        lastName: lastName,
+        age: age,
+        gender: gender,
         specializationID: specializationId,
-        email:email,
-        phone:phone,
-        education:education,
-        experience:experience,
-        address:address,
-        description:description,
+        email: useremail,
+        phone: phone,
+        education: education,
+        experience: experience,
+        address: address,
+        description: description,
         status: "Inactive",
-        image:"",
+        image: "",
       };
-      
+
       fetch("http://localhost:5193/api/Doctor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -102,37 +91,24 @@ export const RegisterTeacher = () => {
         .then((data) => {
           console.log(data);
           toast.success("Doctor added successfully");
-          setFirstName("");
-          setLastName("");
-          setAge(0);
-          setGender("");
-          setSpecializationId(0);
-          setEmail("");
-          setPhone("");
-          setEducation("");
-          setExperience(0);
-          setAddress("");
-          setDescription("");
-          setStatus("");
-          setImage("");
+          resetDoctorForm();
         })
         .catch((error) => {
           console.error(error);
           toast.error("Failed to add doctor");
-          console.log(error)
         });
     }
   };
 
   const addPatient = () => {
-    if (validate()) {
+    if (validatePatient()) {
       const patientData = {
-        firstName,
-        lastName,
-        age,
-        email,
-        phone,
-        address,
+        firstName: firstName,
+        lastName: lastName,
+        age: age,
+        email: useremail,
+        phone: phone,
+        address: address,
       };
       fetch("http://localhost:5193/api/Patient", {
         method: "POST",
@@ -143,12 +119,7 @@ export const RegisterTeacher = () => {
         .then((data) => {
           console.log(data);
           toast.success("Patient added successfully");
-          setFirstName("");
-          setLastName("");
-          setAge(0);
-          setEmail("");
-          setPhone("");
-          setAddress("");
+          resetPatientForm();
         })
         .catch((error) => {
           console.error(error);
@@ -157,23 +128,69 @@ export const RegisterTeacher = () => {
     }
   };
 
-  const validate = () => {
-    let result = true;
-    return result;
-  };
-
   const validateUser = () => {
     let result = true;
     if (username === "" || username === null) {
+      toast.error("Username is required");
       result = false;
     }
     if (password === "" || password === null) {
+      toast.error("Password is required");
+      result = false;
+    }
+    if (useremail === "" || useremail === null) {
+      toast.error("Password is required");
       result = false;
     }
     return result;
   };
 
-  
+  const validateDoctor = () => {
+    let result = true;
+    if (firstName === "" || firstName === null) {
+      toast.error("First Name is required");
+      result = false;
+    }
+    if (lastName === "" || lastName === null) {
+      toast.error("Last Name is required");
+      result = false;
+    }
+    return result;
+  };
+
+  const validatePatient = () => {
+    let result = true;
+    if (firstName === "" || firstName === null) {
+      toast.error("First Name is required");
+      result = false;
+    }
+    if (lastName === "" || lastName === null) {
+      toast.error("Last Name is required");
+      result = false;
+    }
+    return result;
+  };
+
+  const resetDoctorForm = () => {
+    setFirstName("");
+    setLastName("");
+    setAge(0);
+    setGender("");
+    setSpecializationId(0);
+    setPhone("");
+    setEducation("");
+    setExperience(0);
+    setAddress("");
+    setDescription("");
+  };
+
+  const resetPatientForm = () => {
+    setFirstName("");
+    setLastName("");
+    setAge(0);
+    setPhone("");
+    setAddress("");
+  };
 
   return (
     <div className="row">
@@ -224,7 +241,7 @@ export const RegisterTeacher = () => {
                   className="form-control"
                   id="exampleDropdown"
                   onChange={(e) => setRole(e.target.value)}
-                  required
+                  
                 >
                   <option value="">--Role--</option>
                   <option value="doctor">Doctor</option>
@@ -281,15 +298,6 @@ export const RegisterTeacher = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Email:</label>
-                  <input
-                    type="email"
-                    value={email}
-                    className="form-control"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
                   <label>Phone:</label>
                   <input
                     className="form-control"
@@ -333,83 +341,66 @@ export const RegisterTeacher = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
-                  
-                  <div className="form-group">
-                <label>Image:</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="form-control"
-                /></div>
-
                 </div>
               </div>
             )}
 
-            {role === "patient" && 
-            (<div className="py-3">
-              <div className="form-group">
-                <label>First Name:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
+            {role === "patient" && (
+              <div className="py-3">
+                <div className="form-group">
+                  <label>First Name:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Last Name:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Age:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Phone:</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Address:</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                </div>
               </div>
-              <div className="form-group">
-                <label>Last Name:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Age:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Email:</label>
-                <input
-                  type="email"
-                  value={email}
-                  className="form-control"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Phone:</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Address:</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
+            )}
 
             <div className="card-footer">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
+              <div className="form-group">
+                <button type="submit" className="btn btn-primary">
+                  Register
+                </button>
+              </div>
             </div>
           </div>
         </form>
@@ -417,3 +408,5 @@ export const RegisterTeacher = () => {
     </div>
   );
 };
+
+export default RegisterTeacher;

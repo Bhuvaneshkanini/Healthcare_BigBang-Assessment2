@@ -20,8 +20,7 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
         {
             _doctorRepository = doctorRepository;
         }
-        //[Authorize(Roles ="patient,admin")]
-       // GET: api/Doctor
+        [Authorize(Roles ="patient,admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctors()
         {
@@ -29,7 +28,7 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             return doctors;
         }
 
-        //[Authorize(Roles = "patient,admin")]
+        [Authorize(Roles = "patient,admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Doctor>> GetDoctorById(int id)
         {
@@ -43,7 +42,6 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             return Ok(doctor);
         }
         
-        // POST: api/Doctor
         [HttpPost]
         public async Task<ActionResult<Doctor>> CreateDoctor(Doctor doctor)
         {
@@ -51,7 +49,6 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             return CreatedAtAction(nameof(GetDoctorById), new { id = createdDoctor.DoctorId }, createdDoctor);
         }
         
-        // PUT: api/Doctor/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDoctor(int id, Doctor doctor)
         {
@@ -70,7 +67,6 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
             return NoContent();
         }
         [Authorize(Roles = "doctor,admin")]
-        // DELETE: api/Doctor/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDoctor(int id)
         {

@@ -32,15 +32,16 @@ namespace BigBang_Assessment2_Healthcare_.Controllers
 
                 if (user != null)
                 {
-                    //create claims details based on the user information
+
                     var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"] ?? string.Empty),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                          new Claim("UserId", user.UserId.ToString()),
-                         new Claim("Email", user.UserEmail),
-                        new Claim("Password",user.Password),
-                        new Claim(ClaimTypes.Role, user.Role)
+                         new Claim("Email", user.UserEmail ?? string.Empty),
+                         new Claim("Password", user.Password ?? string.Empty),
+                         new Claim(ClaimTypes.Role, user.Role ?? string.Empty)
+
 
                     };
 

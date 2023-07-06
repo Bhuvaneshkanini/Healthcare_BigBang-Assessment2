@@ -14,14 +14,13 @@ import jwt_decode from "jwt-decode";
 export const Login = () => {
   const [username, usernameupdate] = useState("");
   const [password, passwordupdate] = useState("");
-  const role="";
   const usenavigate = useNavigate();
 
   useEffect(() => {
     sessionStorage.clear();
   }, []);
 
-  const ProceedLogin = (e) => {
+  /*const ProceedLogin = (e) => {
     e.preventDefault();
     if (validate()) {
       if (username == "Bhuvi") {
@@ -34,7 +33,7 @@ export const Login = () => {
         window.alert("Incorrect Username");
       }
     }
-  };
+  };*/
   
   const ProceedLoginusingAPI = (e) => {
     e.preventDefault();
@@ -43,7 +42,7 @@ export const Login = () => {
         userName: username,
         password: password,
       };
-      let inputobj = { username: username, password: password };
+      //let inputobj = { username: username, password: password };
       fetch("http://localhost:5193/api/Token", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -55,7 +54,7 @@ export const Login = () => {
         .then((resp) => {
           console.log(resp);
           if (Object.keys(resp).length === 0) {
-            window.alert("invalid credentials");
+            console.log(resp.length)
             toast.error("Login failed, invalid credentials");
           }
            else {
@@ -72,12 +71,12 @@ export const Login = () => {
             console.log(role); 
             if(resp.token)
             {
-              if(role=="doctor")
+              if(role==="doctor")
             {
-              usenavigate("/doctor");
-            }
-            else if(role=="patient"){
               usenavigate("/patient");
+            }
+            else if(role==="patient"){
+              usenavigate("/doctor");
             }
             else{
               usenavigate("/admin")
@@ -91,6 +90,9 @@ export const Login = () => {
         .catch((err) => {
           toast.error("Login Failed due to :" + err.message);
         });
+    }
+    else{
+      toast.error("Enter the credentials");
     }
   };
 

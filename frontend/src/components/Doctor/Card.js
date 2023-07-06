@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DoctorContext } from '../Doctor/DoctorDataCards';
+import { Link } from 'react-router-dom';
 
 
 const MyCard = () => {
@@ -71,7 +72,7 @@ const MyCard = () => {
             <div key={doctor.doctorId} className="col">
               <div className="card custom-card" style={{ width: '20rem' }}>
                 <img
-                  src={`data:image/jpeg;base64,${doctor.image}`}
+                  src={`https://img.freepik.com/free-vector/online-doctor-concept_52683-37472.jpg?w=2000`}
                   className="card-img-top"
                   style={{ height: '15rem' }}
                   alt="Doctor"
@@ -88,8 +89,8 @@ const MyCard = () => {
                 </div>
                 <div className="card-footer">
                   <div className="card-buttons">
-                    <button className="btn btn-primary custom-button">View Profile</button>
-                    <button className="btn btn-secondary custom-button">Book Appointment</button>
+                    <Link to="/undercontruct"><button className="btn btn-primary custom-button">View Profile</button></Link>
+                    <Link to="/undercontruct"><button className="btn btn-secondary custom-button">Book Appointment</button></Link>
                   </div>
                 </div>
               </div>

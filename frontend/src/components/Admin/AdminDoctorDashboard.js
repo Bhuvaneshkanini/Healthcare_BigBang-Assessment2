@@ -1,5 +1,6 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState} from "react";
 import { Adminnav } from "./adminnav";
+import { Link } from "react-router-dom";
 
 export const AdminDoctorDashboard = () => {
   const [Doctors, setDoctors] = useState([]);
@@ -28,24 +29,6 @@ export const AdminDoctorDashboard = () => {
     } catch (error) {
       console.error("Error fetching doctors:", error);
     }
-  };
-
-  const data = {};
-
-  const doctorData = {
-    doctorId: 6,
-    firstName: "string",
-    lastName: "string",
-    age: 0,
-    gender: "string",
-    specializationID: 2,
-    email: "string",
-    phone: "string",
-    education: "string",
-    experience: 0,
-    address: "string",
-    description: "string",
-    Status: "Inactive",
   };
 
   const updateDoctorStatus = async (DoctorId, updatedStatus) => {
@@ -151,7 +134,7 @@ export const AdminDoctorDashboard = () => {
         </thead>
         <tbody>
           {Doctors.map((Doctor) =>{
-          const specializationName = getSpecializationName(Doctor.specializationID);
+          //const specializationName = getSpecializationName(Doctor.specializationID);
           //console.log(specializationName)
           return(
             <tr key={Doctor.doctorId}>
@@ -162,11 +145,14 @@ export const AdminDoctorDashboard = () => {
               <td>{Doctor.gender}</td>
               <td>{Doctor.phone}</td>
               <td>{getSpecializationName(Doctor.specializationID)}</td>
-              <td><button
+              <td>
+                <Link to="/undercontruct">
+                <button
                   className="btn btn-primary"
                 >
                   View
                 </button>
+                </Link>
               </td>
               <td>{Doctor.status}</td>
               <td>

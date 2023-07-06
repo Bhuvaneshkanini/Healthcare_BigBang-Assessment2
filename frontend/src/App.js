@@ -1,11 +1,8 @@
 import "./App.css";
-import { BrowserRouter,Route, Routes,useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter,Route, Routes} from "react-router-dom";
 
-import { DoctorDataCards } from "./components/Doctor/DoctorDataCards";
-import AddDoctor from "./components/Doctor/DoctorAddData";
 import { Login } from "./components/User/Login";
 import { Home } from "./components/Home";
-import { Register } from "./components/User/Register";
 import { About } from "./components/About";
 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
@@ -19,17 +16,15 @@ import { DoctorDashboard } from "./components/Doctor/DoctorsDashboard";
 
 import AddSpecialization from "./components/Patient/AddSpecilization";
 import {PatientDashboard} from "./components/Patient/PatientDashboard";
-import Nav from "./components/Nav";
 import { RegisterTeacher } from "./components/User/Register";
 import { AdminPatientDashboard } from "./components/Admin/AdminPatientDashboard";
 import { UnauthorizedPage } from "./components/User/Unauthorized";
+import UnderConstruction from "./components/User/UnderContruction";
 
 
 
 
 function App() {
-  const token = sessionStorage.getItem('jwttoken');
- 
   return (
     <div className="App">
       <BrowserRouter>
@@ -50,6 +45,7 @@ function App() {
           <Route path="/register" element={<RegisterTeacher />} />
           <Route path="/logged-in" element={<Home></Home>}></Route>
           <Route path="/unauthorized" element={<UnauthorizedPage></UnauthorizedPage>}></Route>
+          <Route path="/undercontruct" element={<UnderConstruction></UnderConstruction>}></Route>
 
         </Routes>
       </BrowserRouter>
